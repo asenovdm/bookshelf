@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>All Books</title>
+ <style>
+    table {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+    }
+    
+    td, th {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+    }
+    
+    tr:nth-child(even) {
+      background-color: #dddddd;
+    }
+
+    a {
+        background-color: green;
+        color: white;
+        text-decoration: none;
+    }
+ </style>
+      
+</head> 
+<body>
+    <nav><a href="/genres">All Genres</a></nav>
+    <table>
+        <tr>
+            <th>Id</th>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Genre</th>     
+        </tr>
+        <tr th:each="book: ${books}">
+            <td th:text="${book.id}"></td>
+            <td th:text="${book.title}"></td>
+            <td th:text="${book.author}"></td>
+            <td th:text="${book.genre.name}"></td>
+            <td><a th:href="@{'/update/' + ${book.id}}">Update</a></td>
+            <td><a th:href="@{'/delete/' + ${book.id}}">Delete</a></td>
+        </tr>
+    </table>
+
+
+</body>
+</html>

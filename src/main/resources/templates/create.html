@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <title>Add New Book</title>
+ <style>
+    a {
+        background-color: blue;
+        color: white;
+        text-decoration: none;
+      }
+ </style>
+</head> 
+<body>
+    <nav><a href="/books">Home Page</a> | <a href="/genres">All Genres</a></nav>
+    <h4>ADD NEW BOOK</h4> 
+    <form method="post" th:object="${book}" th:action="@{/add}">
+
+        <p th:if="${#fields.hasErrors('*')}" style="color:red;">Incorrect Data</p>
+    
+        Title:<br><input type="text" th:field="*{title}"><br>
+        <p th:if="${#fields.hasErrors('title')}" th:errors="*{title}" style="color:red;"></p>
+
+        Author:<br><input type="text" th:field="*{author}"><br>
+        <p th:if="${#fields.hasErrors('author')}" th:errors="*{author}"style="color:red;" ></p>
+
+        Genre:
+        <select th:field="*{genre}"> 
+            <option th:each="genre : ${genres}" th:value="${genre.id}" th:text="${genre.name}">
+            </option> 
+        </select> <br>
+
+        <input type="submit" value="Add">    
+    </form>
+
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <title>Update Book</title>
+
+ <style>
+    a {
+        background-color: green;
+        color: white;
+        text-decoration: none;
+      }
+ </style>
+</head> 
+<body>
+    <nav><a href="/books">Home Page</a> | <a href="/genres">All Genres</a></nav>
+    <h4>UPDATE BOOK</h4> 
+    <form method="post" th:object="${book}" th:action="@{/update}">
+
+        <p th:if="${#fields.hasErrors('*')}" style="color:red;">Incorrect Data</p>
+
+        <input type="hidden" th:field="*{id}" th:value="${book.id}">
+    
+        Title:<br><input type="text" th:field="*{title}" th:value="${book.title}"><br>
+        <p th:if="${#fields.hasErrors('title')}" th:errors="*{title}" style="color:red;"></p>
+
+        Author:<br><input type="text" th:field="*{author}" th:value="${book.author}"><br>
+        <p th:if="${#fields.hasErrors('author')}" th:errors="*{author}" style="color:red;"></p>
+
+        Genre:
+        <select th:field="*{genre}"> 
+            <option th:each="genre : ${genres}" th:value="${genre.id}" th:text="${genre.name}">
+            </option> 
+        </select> <br>
+
+        <input type="submit" value="Update">    
+    </form>
+
+</body>
+</html>
